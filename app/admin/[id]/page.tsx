@@ -7,6 +7,7 @@ import { supabase, type Restaurant, type MenuCategory, type MenuItem } from '@/l
 import { useApp } from '@/lib/AppContext'
 import { AuthGuard } from '@/components/Guard'
 import { PrimaryButton } from '@/components/Field'
+import { ImageUpload } from '@/components/ImageUpload'
 
 type Table = { id: string; label: string; qr_token: string }
 
@@ -72,8 +73,8 @@ function InfoTab({ r, onSaved }: { r: Restaurant; onSaved: (r: Restaurant) => vo
     <div className="flex flex-col gap-3">
       <Inp label="Name" value={form.name} onChange={v => setForm({ ...form, name: v })} />
       <Inp label="Description" value={form.description ?? ''} onChange={v => setForm({ ...form, description: v })} />
-      <Inp label="Logo URL" value={form.logo_url ?? ''} onChange={v => setForm({ ...form, logo_url: v })} />
-      <Inp label="Cover URL" value={form.cover_url ?? ''} onChange={v => setForm({ ...form, cover_url: v })} />
+      <ImageUpload label="Logo" value={form.logo_url ?? ''} onChange={v => setForm({ ...form, logo_url: v })} />
+      <ImageUpload label="Cover" value={form.cover_url ?? ''} onChange={v => setForm({ ...form, cover_url: v })} />
       <Inp label="Address" value={form.address ?? ''} onChange={v => setForm({ ...form, address: v })} />
       <Inp label="Phone" value={form.phone ?? ''} onChange={v => setForm({ ...form, phone: v })} />
       <Inp label="Currency (AMD/USD/EUR)" value={form.currency} onChange={v => setForm({ ...form, currency: v.toUpperCase() })} />
@@ -161,7 +162,7 @@ function MenuTab({ restaurantId }: { restaurantId: string }) {
             <option value="">— category —</option>
             {cats.map(c => <option key={c.id} value={c.id}>{c.name_en}</option>)}
           </select>
-          <input value={newItem.image_url} onChange={e => setNewItem({ ...newItem, image_url: e.target.value })} placeholder="Image URL (optional)" className="h-10 rounded-lg px-3 text-sm outline-none" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }} />
+          <ImageUpload label="" value={newItem.image_url} onChange={v => setNewItem({ ...newItem, image_url: v })} />
           <button onClick={addItem} className="h-10 rounded-lg text-sm font-medium text-white" style={{ background: 'var(--accent)' }}>Add item</button>
         </div>
       </section>
@@ -219,10 +220,14 @@ function StaffTab({ restaurantId, ownerId }: { restaurantId: string; ownerId: st
   const add = async () => {
     setMsg('')
     if (!email) return
-    // find profile by email via auth.users isn't accessible; instruct: have staff sign up first, then add by their email
-    // Use profiles table joined via auth.users? Profiles has only id. We need to look up via auth admin (server-side).
-    // Workaround: use RPC or ask user to share their profile id. For MVP, we tell them.
-    setMsg('Ask staff member to sign up first, then share their account ID with you to add them. (Lookup-by-email needs server-side admin API — coming next.)')
+    const { error } = await supabase.rpc('add_staff_by_email', {
+      p_restaurant_id: restaurantId,
+      p_email: email,
+      p_role: role,
+    })
+    if (error) { setMsg(error.message); return }
+    setEmail(''); setMsg('Added.')
+    load()
   }
   const remove = async (id: number) => { await supabase.from('restaurant_staff').delete().eq('id', id); load() }
 
