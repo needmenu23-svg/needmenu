@@ -16,14 +16,22 @@ export default function Welcome() {
 
   return (
     <main className="relative min-h-dvh flex flex-col items-center justify-between px-6 py-16 text-center">
-      <div className="flex-1 flex flex-col items-center justify-center gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center gap-8">
         <div
-          className="w-32 h-32 rounded-3xl flex items-center justify-center text-5xl font-bold text-white"
-          style={{ background: 'linear-gradient(135deg, var(--accent), var(--accent-hi))', boxShadow: '0 20px 60px rgba(255,90,31,0.35)' }}
+          className="w-28 h-28 rounded-3xl flex items-center justify-center"
+          style={{ background: 'var(--green)', boxShadow: '0 12px 40px rgba(77,163,77,0.3)' }}
+          aria-label="Need Menu"
         >
-          NM
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" stroke="white" strokeWidth="6" strokeLinecap="round">
+            <path d="M14 50 Q14 28 36 28" />
+            <path d="M14 50 Q14 14 50 14" />
+            <circle cx="14" cy="50" r="3" fill="white" stroke="none" />
+          </svg>
         </div>
-        <h1 className="text-4xl font-bold tracking-tight">{t.appName}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">
+          <span style={{ color: 'var(--green)' }}>Need</span>{' '}
+          <span style={{ color: 'var(--accent)' }}>Menu</span>
+        </h1>
         <p className="text-base" style={{ color: 'var(--text-2)' }}>{t.tagline}</p>
       </div>
 

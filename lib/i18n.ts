@@ -58,6 +58,12 @@ const en: Dict = {
   price: 'Price',
   notes: 'Notes',
   table: 'Table',
+  callWaiter: 'Call waiter',
+  payment: 'Payment',
+  payCash: 'Pay with cash',
+  payCard: 'Pay with card',
+  thanks: 'Thank you!',
+  history: 'Order history',
 }
 
 const ru: Dict = {
@@ -110,6 +116,12 @@ const ru: Dict = {
   price: 'Цена',
   notes: 'Заметки',
   table: 'Стол',
+  callWaiter: 'Позвать официанта',
+  payment: 'Оплата',
+  payCash: 'Оплатить наличными',
+  payCard: 'Оплатить картой',
+  thanks: 'Спасибо!',
+  history: 'История заказов',
 }
 
 const hy: Dict = {
@@ -162,6 +174,12 @@ const hy: Dict = {
   price: 'Գին',
   notes: 'Նշումներ',
   table: 'Սեղան',
+  callWaiter: 'Կանչել մատուցողին',
+  payment: 'Վճարում',
+  payCash: 'Վճարել կանխիկ',
+  payCard: 'Վճարել քարտով',
+  thanks: 'Շնորհակալություն!',
+  history: 'Պատվերների պատմություն',
 }
 
 export const T: Record<Lang, Dict> = { en, ru, hy }

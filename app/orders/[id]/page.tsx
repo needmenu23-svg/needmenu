@@ -51,10 +51,12 @@ function Inner() {
       </div>
 
       <div className="text-center mb-8">
-        <CheckCircle2 size={56} className="mx-auto mb-3" style={{ color: 'var(--accent)' }} />
+        <div className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'rgba(77,163,77,0.12)' }}>
+          <CheckCircle2 size={48} style={{ color: 'var(--green)' }} strokeWidth={2.2} />
+        </div>
         <h1 className="text-2xl font-bold">{t.orderPlaced}</h1>
-        <p className="text-xs mt-1" style={{ color: 'var(--text-2)' }}>#{order.id.slice(0, 8)}</p>
-        <p className="text-sm mt-3 font-semibold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>{statusLabel}</p>
+        <p className="text-xs mt-1" style={{ color: 'var(--text-3)' }}>#{order.id.slice(0, 8).toUpperCase()}</p>
+        <p className="text-xs mt-4 font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--green)' }}>{statusLabel}</p>
       </div>
 
       <div className="rounded-2xl p-4 mb-4" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>

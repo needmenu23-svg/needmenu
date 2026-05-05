@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
-import { Heart, Search, Grid3x3, List, ArrowLeft, Plus, ShoppingBag } from 'lucide-react'
+import { Heart, Search, Grid3x3, List, ArrowLeft, Plus, ShoppingBag, Bell } from 'lucide-react'
+import Link from 'next/link'
 import { supabase, type Restaurant, type MenuItem, type MenuCategory } from '@/lib/supabase'
 import { useApp } from '@/lib/AppContext'
 import { T, pickLocalized, LANGS } from '@/lib/i18n'
@@ -100,6 +101,9 @@ export default function RestaurantPage() {
           <button onClick={cycleLang} aria-label="Language" className="h-9 px-2 rounded-lg flex items-center justify-center text-white text-xs font-bold" style={{ background: 'var(--green)' }}>
             {lang.toUpperCase()}
           </button>
+          <Link href="/call" aria-label={t.callWaiter} className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'var(--accent)' }}>
+            <Bell size={16} color="#fff" />
+          </Link>
         </div>
 
         {showSearch && (

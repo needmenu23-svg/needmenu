@@ -28,7 +28,7 @@ export function BottomNav() {
             key={href}
             href={href}
             className="flex flex-col items-center gap-0.5 px-2"
-            style={{ color: active ? 'var(--accent)' : 'var(--text-3)' }}
+            style={{ color: active ? 'var(--green)' : 'var(--text-3)' }}
           >
             <Icon size={20} strokeWidth={active ? 2.5 : 2} />
             <span className="text-[10px]">{label}</span>
